@@ -2,6 +2,7 @@
 """
 .. codeauthor:: Mona Koehler <mona.koehler@tu-ilmenau.de>
 .. codeauthor:: Daniel Seichter <daniel.seichter@tu-ilmenau.de>
+.. modifier:: Florian Kitzler <florian.kitzler@boku.ac.at> (fk)
 """
 import argparse
 
@@ -160,12 +161,13 @@ class ArgumentParserRGBDSegmentation(argparse.ArgumentParser):
                                'neighbor interpolation and a 3x3 conv '
                                'afterwards')
 
-        # dataset
+        # dataset, add we3ds as option (fk)
         self.add_argument('--dataset', default='nyuv2',
                           choices=['sunrgbd',
                                    'nyuv2',
                                    'cityscapes', 'cityscapes-with-depth',
-                                   'scenenetrgbd'])
+                                   'scenenetrgbd',
+                                   'we3ds'])
         self.add_argument('--dataset_dir',
                           default=None,
                           help='Path to dataset root.',)

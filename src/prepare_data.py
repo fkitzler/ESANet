@@ -2,6 +2,7 @@
 """
 .. codeauthor:: Mona Koehler <mona.koehler@tu-ilmenau.de>
 .. codeauthor:: Daniel Seichter <daniel.seichter@tu-ilmenau.de>
+.. modifier:: Florian Kitzler <florian.kitzler@boku.ac.at> (fk)
 """
 import copy
 import os
@@ -13,6 +14,7 @@ from src.datasets import Cityscapes
 from src.datasets import NYUv2
 from src.datasets import SceneNetRGBD
 from src.datasets import SUNRGBD
+from src.datasets import WE3DS #fk
 
 
 def prepare_data(args, ckpt_dir=None, with_input_orig=False, split=None):
@@ -47,6 +49,11 @@ def prepare_data(args, ckpt_dir=None, with_input_orig=False, split=None):
             # for SceneNetRGBD, we additionally scale up the images by factor
             # of 2
             train_preprocessor_kwargs['train_random_rescale'] = (1.0*2, 1.4*2)
+    # Add parameters for WE3DS dataset (fk)
+    elif args.dataset == 'we3ds':
+        Dataset = WE3DS
+        dataset_kwargs = {}
+        valid_set = 'test'
     else:
         raise ValueError(f"Unknown dataset: `{args.dataset}`")
     if args.aug_scale_min != 1 or args.aug_scale_max != 1.4:
